@@ -12,7 +12,7 @@ const VERSION = "0.2.18";
 
 export function printHelp() {
   console.log(`
-${c.bold}Codex Switcher CLI${c.reset} v${VERSION}
+${c.bold}Agent Switcher CLI${c.reset} v${VERSION}
 A command-line multi-account manager for OpenAI Codex CLI
 
 ${c.bold}USAGE:${c.reset}

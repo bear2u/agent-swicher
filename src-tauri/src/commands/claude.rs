@@ -105,7 +105,7 @@ fn parse_accounts(bytes: &[u8]) -> Result<Vec<ClaudeAccount>, String> {
     let envelope: ListEnvelope = serde_json::from_slice(bytes)
         .map_err(|_| "Unexpected claude-swap response. Update claude-swap to a compatible version (0.26.0 or newer).".to_string())?;
     if envelope.schema_version != 1 {
-        return Err("Unsupported claude-swap JSON schema. Update Codex Switcher.".into());
+        return Err("Unsupported claude-swap JSON schema. Update Agent Switcher.".into());
     }
     Ok(envelope.accounts)
 }

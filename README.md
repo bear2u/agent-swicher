@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="src-tauri/icons/logo.svg" alt="Codex Switcher" width="128" height="128">
+  <img src="src-tauri/icons/logo.svg" alt="Agent Switcher" width="128" height="128">
 </p>
 
-<h1 align="center">Codex Switcher</h1>
+<h1 align="center">Agent Switcher</h1>
 
 <p align="center">
-  A Desktop Application for Managing Multiple OpenAI <a href="https://github.com/openai/codex">Codex</a> Accounts<br>
+  A Desktop Application for Managing Multiple <a href="https://github.com/openai/codex">Codex</a> and Claude Code Accounts<br>
   Easily switch between accounts, monitor usage, schedule warm-ups, and stay in control of your quota
 </p>
 
@@ -24,7 +24,7 @@
 - **Automatic Warm-Up** – Warm up one account or all accounts manually, after each 5-hour reset window, or at specific scheduled times of day
 - **System Tray Controls** – Use the tray popup to switch accounts, inspect quota and active-account stats, refresh usage, open the main window, or quit the app
 - **Tray Display Modes** – Choose between the app icon with session percentage, a text-only hourly/weekly percentage display, or a hidden tray icon
-- **macOS Dock Control** – Keep Codex Switcher in the Dock or run it as a menu bar only app, with a first-close prompt and a tray fallback
+- **macOS Dock Control** – Keep Agent Switcher in the Dock or run it as a menu bar only app, with a first-close prompt and a tray fallback
 - **Rate-Limit Monitoring** – View real-time 5-hour session and weekly usage, reset timing, credits, and subscription expiry
 - **Blocked Switch Recovery** – Detect running Codex sessions and offer a force-close flow before retrying the account switch
 - **Dual Login Mode** – Authenticate with ChatGPT OAuth or import existing `auth.json` files
@@ -69,7 +69,9 @@ continue to apply only to Codex accounts.
 
 ### Download a Release
 
-The easiest way to install Codex Switcher is from the latest GitHub release:
+Agent Switcher is the local variant with Claude Code support. Build it from this
+checkout to get `Agent Switcher.app`. The upstream releases below are the original
+Codex Switcher and do not include these local changes:
 
 [Download the latest release](https://github.com/Lampese/codex-switcher/releases/latest)
 
@@ -86,15 +88,19 @@ Choose the file for your platform:
 > app is damaged, move it to `/Applications` and remove the quarantine flag:
 >
 > ```bash
-> sudo xattr -dr com.apple.quarantine "/Applications/Codex Switcher.app"
-> open "/Applications/Codex Switcher.app"
+> sudo xattr -dr com.apple.quarantine "/Applications/Agent Switcher.app"
+> open "/Applications/Agent Switcher.app"
 > ```
 
 ### Auto Updates
 
-Codex Switcher checks the latest GitHub release on startup. When a newer signed
+Agent Switcher currently checks the upstream Codex Switcher GitHub releases on startup.
+Installing an upstream update replaces this local variant. When a newer signed
 update package is available, the app shows an update prompt and can install it
 from inside the app.
+
+The application identifier and existing `~/.codex-switcher` data directory remain
+unchanged so saved accounts and preferences carry over after the rename.
 
 ### Build from Source
 
@@ -143,7 +149,7 @@ The browser dashboard serves the same UI and backend actions through `/api/invok
 
 ## Usage and Reset Credits
 
-Codex Switcher shows two kinds of account usage information:
+Agent Switcher shows two kinds of account usage information:
 
 - **Rate limits** – the account card shows the current 5-hour and weekly limit
   windows, remaining percentage, reset timing, credit balance, and subscription
@@ -164,23 +170,23 @@ the last 7 days, while keeping the normal rate-limit refresh flow separate.
 ## Safe Account Switching
 
 ChatGPT can replace an OAuth refresh token after using it. Once replaced, the
-older token may no longer be accepted. Before Codex Switcher writes another
+older token may no longer be accepted. Before Agent Switcher writes another
 account to `~/.codex/auth.json`, it now saves the latest tokens from the account
 that is currently active. Switching back therefore restores the current session
 instead of an older snapshot.
 
 Token refreshes and account switches are serialized so a background refresh
-cannot finish late and overwrite the account you just selected. Codex Switcher
+cannot finish late and overwrite the account you just selected. Agent Switcher
 also avoids refreshing the active account while Codex or ChatGPT is running;
 close the running app before switching accounts.
 
-If an older Codex Switcher version already saved an invalid refresh token, sign
+If an older Agent Switcher version already saved an invalid refresh token, sign
 in to that account again or remove and re-add it once. An invalidated token
 cannot be recovered locally.
 
 ## macOS Dock and Menu Bar Mode
 
-On macOS, Codex Switcher can either stay visible in the Dock or live only in the
+On macOS, Agent Switcher can either stay visible in the Dock or live only in the
 menu bar. The first time you close the main window, the app asks which behavior
 you want and lets you choose whether to show that prompt again.
 
@@ -213,7 +219,7 @@ On macOS you can keep the machine awake with the built-in `caffeinate` command,
 which stops automatically when the app quits:
 
 ```bash
-caffeinate -i -w "$(pgrep -x 'Codex Switcher')"
+caffeinate -i -w "$(pgrep -x 'codex-switcher')"
 ```
 
 ## Disclaimer

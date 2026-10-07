@@ -177,7 +177,7 @@ export async function loginWithChatGPT(accountName, options = {}) {
         res.end(`
           <!DOCTYPE html>
           <html>
-            <head><title>Codex Switcher - Login Successful</title></head>
+            <head><title>Agent Switcher - Login Successful</title></head>
             <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #0f172a; color: #f8fafc;">
               <div style="text-align: center; padding: 2.5rem; background: #1e293b; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
                 <h1 style="color: #38bdf8; margin-bottom: 0.5rem;">Login Successful!</h1>

@@ -365,7 +365,7 @@ fn close_processes_with_admin_privileges(pids: &[u32], force: bool) -> bool {
     let signal = if force { "-9" } else { "-TERM" };
     let action = if force { "force close" } else { "close" };
     let script = format!(
-        r#"do shell script "for pid in {pid_args}; do /bin/kill {signal} \"$pid\" 2>/dev/null || true; done" with administrator privileges with prompt "Codex Switcher needs permission to {action} sudo/root Codex processes.""#
+        r#"do shell script "for pid in {pid_args}; do /bin/kill {signal} \"$pid\" 2>/dev/null || true; done" with administrator privileges with prompt "Agent Switcher needs permission to {action} sudo/root Codex processes.""#
     );
 
     Command::new("/usr/bin/osascript")

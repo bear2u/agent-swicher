@@ -1419,7 +1419,7 @@ function App() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
-                    Codex Switcher
+                    Agent Switcher
                   </h1>
                   {processInfo && (
                     <div className="inline-flex items-center gap-1">
@@ -2046,7 +2046,7 @@ function App() {
               </div>
               {pendingSwitchAccount && (
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  After closing Codex, Codex Switcher will switch to{" "}
+                  After closing Codex, Agent Switcher will switch to{" "}
                   <span className="font-medium text-gray-900 dark:text-gray-100">
                     {pendingSwitchAccount.name}
                   </span>
@@ -2115,12 +2115,12 @@ function App() {
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl w-full max-w-md mx-4 shadow-xl">
             <div className="p-5 border-b border-gray-100 dark:border-gray-800">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Keep Codex Switcher in the Dock?
+                Keep Agent Switcher in the Dock?
               </h2>
             </div>
             <div className="p-5 space-y-4">
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                When the window is closed, Codex Switcher can stay in the Dock or live only in the menu bar.
+                When the window is closed, Agent Switcher can stay in the Dock or live only in the menu bar.
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-300">
                 You can always change this later from the tray popup.

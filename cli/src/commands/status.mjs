@@ -50,7 +50,7 @@ export function handleStatus(options = {}) {
     return;
   }
 
-  console.log(`\n${c.bold}Codex Switcher Environment Status${c.reset}\n`);
+  console.log(`\n${c.bold}Agent Switcher Environment Status${c.reset}\n`);
 
   // 1. ~/.codex/auth.json
   console.log(`${c.bold}Codex CLI Auth:${c.reset}`);
@@ -68,7 +68,7 @@ export function handleStatus(options = {}) {
   }
 
   // 2. ~/.codex-switcher/accounts.json
-  console.log(`\n${c.bold}Codex Switcher Store:${c.reset}`);
+  console.log(`\n${c.bold}Agent Switcher Store:${c.reset}`);
   console.log(`  File:      ${accountsFile}`);
   if (storeError) {
     console.log(`  Status:    ${c.red}Error: ${storeError}${c.reset}`);

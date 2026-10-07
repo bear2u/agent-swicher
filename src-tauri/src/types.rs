@@ -1,4 +1,4 @@
-//! Core types for Codex Switcher
+//! Core types for Agent Switcher
 
 use base64::Engine;
 use chrono::{DateTime, Utc};

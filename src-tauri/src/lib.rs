@@ -1,4 +1,4 @@
-//! Codex Switcher - Multi-account manager for Codex CLI
+//! Agent Switcher - Multi-account manager for Codex CLI
 
 pub mod api;
 #[cfg(desktop)]

@@ -1,6 +1,6 @@
-# Codex Switcher CLI
+# Agent Switcher CLI
 
-A lightweight, zero-dependency command-line multi-account manager for OpenAI Codex CLI. It seamlessly shares state and accounts with the Codex Switcher desktop app (`~/.codex-switcher/accounts.json`) and manages `~/.codex/auth.json`.
+A lightweight, zero-dependency command-line multi-account manager for OpenAI Codex CLI. It seamlessly shares state and accounts with the Agent Switcher desktop app (`~/.codex-switcher/accounts.json`) and manages `~/.codex/auth.json`.
 
 ## Features
 
@@ -8,7 +8,7 @@ A lightweight, zero-dependency command-line multi-account manager for OpenAI Cod
 - 🔄 **Safe Token Sync**: Automatically preserves and syncs refreshed OAuth tokens back to `accounts.json` before switching.
 - 🛡️ **Active Process Guard**: Detects running Codex CLI sessions or Desktop app instances to prevent accidental credential corruption.
 - 🔐 **ChatGPT OAuth & API Key Support**: Log in with ChatGPT OAuth straight from the terminal or add API keys.
-- 🌐 **100% Interoperable**: Fully compatible with Codex Switcher Desktop App & Tray menu.
+- 🌐 **100% Interoperable**: Fully compatible with Agent Switcher Desktop App & Tray menu.
 - 📦 **Zero External Dependencies**: Powered by pure Node.js built-ins.
 
 ---
@@ -80,7 +80,7 @@ codex-switch whoami
 
 ### 4. Login with ChatGPT OAuth
 
-Opens your browser to authenticate with OpenAI and registers the account directly into Codex Switcher:
+Opens your browser to authenticate with OpenAI and registers the account directly into Agent Switcher:
 
 ```bash
 codex-switch login <account-name>

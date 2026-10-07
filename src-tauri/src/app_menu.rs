@@ -33,7 +33,7 @@ pub fn setup(app: &AppHandle) -> tauri::Result<()> {
     }
     #[cfg(not(target_os = "macos"))]
     {
-        // On non-macOS platforms, Codex Switcher uses a frameless custom UI (decorations: false).
+        // On non-macOS platforms, Agent Switcher uses a frameless custom UI (decorations: false).
         // Settings are managed in the tray menu and in-app UI, so no native window menu is attached.
         refresh(app)?;
     }
