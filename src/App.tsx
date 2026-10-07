@@ -43,6 +43,7 @@ import {
 } from "./lib/autoWarmupPolicy";
 import { getTauriWindow } from "./lib/tauriWindow";
 import "./App.css";
+import { ClaudeAccountsPanel } from "./components/ClaudeAccountsPanel";
 
 const AUTO_WARMUP_CHECK_INTERVAL_MS = 30 * 1000;
 const AUTO_WARMUP_RETRY_BACKOFF_MS = 60 * 1000;
@@ -165,6 +166,7 @@ function matchesAccountSearch(
 }
 
 function App() {
+  const [service, setService] = useState<"codex" | "claude">("codex");
   const {
     accounts,
     loading,
@@ -1403,7 +1405,15 @@ function App() {
           )}
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 py-4">
+        <nav aria-label="Account service" className="max-w-5xl mx-auto flex gap-2 px-6 pt-3 pb-2">
+          {(["codex", "claude"] as const).map(item => (
+            <button key={item} aria-pressed={service === item} onClick={() => setService(item)}
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${service === item ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900" : "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"}`}>
+              {item === "codex" ? "Codex" : "Claude Code"}
+            </button>
+          ))}
+        </nav>
+        <div hidden={service !== "codex"} className="max-w-5xl mx-auto px-6 py-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_max-content] md:items-center md:gap-4">
             <div className="flex items-center gap-3 min-w-0 flex-1">
               <div className="min-w-0">
@@ -1729,7 +1739,7 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-5xl mx-auto px-6 pt-4 pb-8">
-        {loading && accounts.length === 0 ? (
+        {service === "claude" ? <ClaudeAccountsPanel /> : loading && accounts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20">
             <div className="animate-spin h-10 w-10 border-2 border-gray-900 dark:border-gray-100 border-t-transparent rounded-full mb-4"></div>
             <p className="text-gray-500 dark:text-gray-400">Loading accounts...</p>

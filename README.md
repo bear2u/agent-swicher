@@ -29,6 +29,42 @@
 - **Blocked Switch Recovery** – Detect running Codex sessions and offer a force-close flow before retrying the account switch
 - **Dual Login Mode** – Authenticate with ChatGPT OAuth or import existing `auth.json` files
 
+## Claude Code accounts
+
+The **Claude Code** tab manages multiple Claude Code logins independently of
+Codex. It supports saving the current login, switching accounts, and displaying
+5-hour / 7-day quota and reset times. Existing claude-swap accounts are reused.
+
+Install [claude-swap](https://github.com/realiti4/claude-swap) 0.26.0 or newer
+(Python 3.12+) on the machine running the app:
+
+```sh
+uv tool install --upgrade claude-swap
+# Alternatively: pipx install claude-swap
+```
+
+1. Open Claude Code (`claude`) and sign in with `/login`.
+2. In this app, choose **Claude Code → Add account → Save current login**.
+3. Sign in to another account with `/login` and save again. Avoid `/logout`:
+   it can revoke the previous account's saved refresh token.
+4. Select **Switch account** on the desired account card.
+
+The integration uses the default Claude profile. Credentials remain managed by
+claude-swap (Keychain on macOS); the UI receives account metadata and usage only.
+macOS Claude Code may take about 30 seconds to observe a changed login; reopen
+its session to apply it immediately. This supports Claude Code CLI and the
+VS Code extension, not the general Claude desktop application's login.
+
+The app finds `cswap` in `~/.local/bin`, its inherited PATH, and standard
+Homebrew locations. Usage refreshes every two minutes while the Claude tab is
+visible; claude-swap controls caching and API backoff. Last-known readings are
+marked when live usage is unavailable. For the LAN dashboard, installation and
+all account operations happen on the server machine.
+
+Claude automatic rotation, parallel session launch, and tray switching are not
+part of this integration. Codex warm-ups, reset credits, and account exports
+continue to apply only to Codex accounts.
+
 ## Installation
 
 ### Download a Release

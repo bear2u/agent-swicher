@@ -13,3 +13,6 @@ pub use oauth::*;
 pub use process::*;
 pub use usage::*;
 pub use window::*;
+
+pub mod claude;
+pub use claude::*;

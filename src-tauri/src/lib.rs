@@ -65,6 +65,9 @@ pub fn run() {
             commands::open_codex_app,
             commands::get_codex_reopen_info,
             commands::reopen_closed_codex_desktop,
+            commands::list_claude_accounts,
+            commands::add_claude_account,
+            commands::switch_claude_account,
             // Account management
             list_accounts,
             get_active_account_info,
