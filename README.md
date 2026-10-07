@@ -5,7 +5,7 @@
 <h1 align="center">Agent Switcher</h1>
 
 <p align="center">
-  A Desktop Application for Managing Multiple <a href="https://github.com/openai/codex">Codex</a> and Claude Code Accounts<br>
+  A Desktop Application for Managing Multiple <a href="https://github.com/openai/codex">Codex</a> and Claude Accounts<br>
   Easily switch between accounts, monitor usage, schedule warm-ups, and stay in control of your quota
 </p>
 
@@ -29,9 +29,41 @@
 - **Blocked Switch Recovery** – Detect running Codex sessions and offer a force-close flow before retrying the account switch
 - **Dual Login Mode** – Authenticate with ChatGPT OAuth or import existing `auth.json` files
 
+## Claude desktop accounts (macOS)
+
+Choose **Claude → Claude app**. The desktop integration is separate from Claude
+Code CLI and does not require `cswap`.
+
+1. Open Claude and sign in to the first account. Return to Agent Switcher and select **Refresh**.
+2. Enter an optional label and select **Save desktop login**. Claude closes and reopens to save consistent login files.
+3. Select **Add another account → Save current & add another**. Sign in to the other account in Claude, select **Refresh**, and save that login too.
+4. Use **Switch & restart Claude** on a saved account. Finish running Claude work before switching.
+
+This is an experimental, same-Mac session restore feature, not an official
+Anthropic account-switching API. It snapshots the existing opaque authentication
+values and cookie database after a graceful shutdown. It supports both root and
+`Network` cookie locations, keeps unrelated configuration, and does not copy or
+merge conversations. It does not revoke the saved account's server session.
+Expired or revoked logins still require interactive sign-in and saving again.
+
+Snapshots live in `~/.codex-switcher/claude-desktop` with owner-only permissions.
+They contain sensitive session data: do not share or commit them. The app does
+not decrypt credentials, display tokens, or include them in account exports.
+A durable recovery snapshot is kept during changes; use **Restore previous login**
+if an interrupted operation cannot recover automatically. Unsupported formats
+and apps that refuse to quit block switching. Windows/Linux desktop switching
+is not implemented.
+
+The session-storage approach was informed by
+[Claude Account Switcher](https://github.com/SnlperStripes/claude-account-switcher).
+See [third-party notices](docs/third-party/claude-account-switcher-NOTICE.txt).
+The transactional Rust implementation and fixture tests are maintained here.
+Real multi-account acceptance still needs validation in the installed Claude app;
+opening the process does not itself prove the restored session was accepted.
+
 ## Claude Code accounts
 
-The **Claude Code** tab manages multiple Claude Code logins independently of
+The **Claude → Claude Code CLI** tab manages multiple Claude Code logins independently of
 Codex. It supports saving the current login, switching accounts, and displaying
 5-hour / 7-day quota and reset times. Existing claude-swap accounts are reused.
 
@@ -44,7 +76,7 @@ uv tool install --upgrade claude-swap
 ```
 
 1. Open Claude Code (`claude`) and sign in with `/login`.
-2. In this app, choose **Claude Code → Add account → Save current login**.
+2. In this app, choose **Claude → Claude Code CLI → Add account → Save current login**.
 3. Sign in to another account with `/login` and save again. Avoid `/logout`:
    it can revoke the previous account's saved refresh token.
 4. Select **Switch account** on the desired account card.
@@ -53,7 +85,7 @@ The integration uses the default Claude profile. Credentials remain managed by
 claude-swap (Keychain on macOS); the UI receives account metadata and usage only.
 macOS Claude Code may take about 30 seconds to observe a changed login; reopen
 its session to apply it immediately. This supports Claude Code CLI and the
-VS Code extension, not the general Claude desktop application's login.
+VS Code extension. Desktop accounts use the separate **Claude app** tab.
 
 The app finds `cswap` in `~/.local/bin`, its inherited PATH, and standard
 Homebrew locations. Usage refreshes every two minutes while the Claude tab is

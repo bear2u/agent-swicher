@@ -135,6 +135,23 @@ fn handle_request(mut request: Request, runtime: &Runtime, dist_dir: &Path) -> a
 
 async fn invoke_web_command(command: &str, payload: Value) -> Result<Value, String> {
     match command {
+        "list_claude_desktop_accounts" => {
+            to_json(crate::commands::list_claude_desktop_accounts().await?)
+        }
+        "claude_desktop_action" => {
+            #[derive(Deserialize)]
+            #[serde(rename_all = "camelCase")]
+            struct DesktopArgs {
+                action: crate::commands::DesktopAction,
+                account_id: Option<String>,
+                name: Option<String>,
+            }
+            let args: DesktopArgs = parse_args(payload)?;
+            to_json(
+                crate::commands::claude_desktop_action(args.action, args.account_id, args.name)
+                    .await?,
+            )
+        }
         "list_claude_accounts" => to_json(crate::commands::list_claude_accounts().await?),
         "add_claude_account" => to_json(crate::commands::add_claude_account().await?),
         "switch_claude_account" => {

@@ -1409,7 +1409,7 @@ function App() {
           {(["codex", "claude"] as const).map(item => (
             <button key={item} aria-pressed={service === item} onClick={() => setService(item)}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${service === item ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900" : "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"}`}>
-              {item === "codex" ? "Codex" : "Claude Code"}
+              {item === "codex" ? "Codex" : "Claude"}
             </button>
           ))}
         </nav>

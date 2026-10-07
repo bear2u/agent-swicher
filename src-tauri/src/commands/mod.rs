@@ -16,3 +16,6 @@ pub use window::*;
 
 pub mod claude;
 pub use claude::*;
+
+pub mod claude_desktop;
+pub use claude_desktop::*;

@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { invokeBackend } from "../lib/platform";
 import { claudeStatus, claudeUsage, type ClaudeAccount, type ClaudeAccounts } from "../lib/claude";
+import { ClaudeDesktopPanel } from "./ClaudeDesktopPanel";
 import { UsageBar } from "./UsageBar";
 
 const button = "rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800";
 
-export function ClaudeAccountsPanel() {
+function ClaudeCodeAccountsPanel() {
   const [data, setData] = useState<ClaudeAccounts | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -119,4 +120,16 @@ export function ClaudeAccountsPanel() {
       <p className="text-xs text-gray-500 dark:text-gray-400">For Claude Code CLI and the VS Code extension. Each service keeps its own active account. Usage refreshes every two minutes while this tab is visible; cached readings may be older.</p>
     </section>
   );
+}
+
+
+export function ClaudeAccountsPanel() {
+  const [mode, setMode] = useState<"desktop" | "cli">("desktop");
+  return <div className="space-y-5">
+    <nav aria-label="Claude application" className="flex gap-2">
+      <button className={`${button} aria-pressed:border-orange-400 aria-pressed:bg-orange-50 dark:aria-pressed:bg-orange-950`} aria-pressed={mode === "desktop"} onClick={() => setMode("desktop")}>Claude app</button>
+      <button className={`${button} aria-pressed:border-orange-400 aria-pressed:bg-orange-50 dark:aria-pressed:bg-orange-950`} aria-pressed={mode === "cli"} onClick={() => setMode("cli")}>Claude Code CLI</button>
+    </nav>
+    {mode === "desktop" ? <ClaudeDesktopPanel /> : <ClaudeCodeAccountsPanel />}
+  </div>;
 }
